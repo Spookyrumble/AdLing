@@ -1,0 +1,15 @@
+{
+  "name": "adding",
+  "version": "0.0.1",
+  "description": "Finds the jobs so you do not have to",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hans Marius Andreassen",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5"
+  }
+}

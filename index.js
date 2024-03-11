@@ -1,16 +1,42 @@
-import { config } from "dotenv";
 import { Client, Events, GatewayIntentBits } from "discord.js";
-config();
+import { config } from "dotenv";
+import { fetchFrontEndJobs } from "./scrapeJobs.mjs"; // Make sure this is correctly imported
 
-// Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+config(); // Loads the .env file
 
-// When the client is ready, run this code (only once).
-// The distinction between `client: Client<boolean>` and `readyClient: Client<true>` is important for TypeScript developers.
-// It makes some properties non-nullable.
-client.once(Events.ClientReady, (readyClient) => {
-  console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
-// Log in to Discord with your client's token
+client.once(Events.ClientReady, () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+// Listen for interactions
+client.on(Events.InteractionCreate, async (interaction) => {
+  if (!interaction.isCommand()) return;
+
+  const { commandName } = interaction;
+
+  if (commandName === "jobs") {
+    await interaction.deferReply();
+    const jobs = await fetchFrontEndJobs();
+    const response = jobs
+      .map((job) => `${job.title}\n${job.link}`)
+      .join("\n\n");
+    if (response.length > 0) {
+      await interaction.editReply(`Here are the jobs:\n${response}`);
+    } else {
+      await interaction.editReply("No jobs found at the moment.");
+    }
+  } else if (commandName === "pingling") {
+    // Add this else-if block
+    await interaction.reply("Pong!");
+  }
+});
+
 client.login(process.env.DISCORD_TOKEN);

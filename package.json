@@ -1,5 +1,5 @@
 {
-  "name": "adding",
+  "name": "adling",
   "version": "0.0.1",
   "description": "Finds the jobs so you do not have to",
   "main": "index.js",
@@ -10,6 +10,10 @@
   "author": "Hans Marius Andreassen",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/rest": "^2.2.0",
+    "axios": "^1.6.7",
+    "cheerio": "^1.0.0-rc.12",
+    "discord-api-types": "^0.37.73",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5"
   }

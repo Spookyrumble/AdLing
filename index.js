@@ -2,7 +2,7 @@ import { Client, Events, GatewayIntentBits } from "discord.js";
 import { config } from "dotenv";
 import cron from "node-cron";
 import { fetchFrontEndJobs } from "./scrapeJobs.mjs";
-import { postJobsToDiscord } from "./postJobs.js";
+import { postJobsToDiscord } from "./postingJobs.mjs";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -31,7 +31,7 @@ client.once(Events.ClientReady, () => {
     },
     {
       scheduled: true,
-      timezone: "Your/Timezone",
+      timezone: "Europe/Oslo",
     }
   );
 });
@@ -68,3 +68,5 @@ client.on(Events.InteractionCreate, async (interaction) => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
+export { client };

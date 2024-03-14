@@ -1,7 +1,9 @@
 import fs from "fs/promises";
 import path from "path";
 import { client } from "./index.js"; // Make sure this import matches your setup
+import { fileURLToPath } from "url";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_FILE_PATH = path.join(__dirname, "data.json");
 const CHANNEL_ID = "1165931354127609876"; // Replace with your actual channel ID
 const POST_DELAY_MS = 1000; // Delay between posts, 1000 milliseconds = 1 second

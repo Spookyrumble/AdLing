@@ -55,29 +55,25 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
   if (commandName === "jobs") {
     await interaction.deferReply();
-    const data = JSON.parse(
-      await fs.readFile(DATA_FILE_PATH, { encoding: "utf8" })
-    );
-    let jobsToPost = data.filter((job) => !job.posted).slice(0, 5);
 
-    if (jobsToPost.length > 0) {
-      for (const job of jobsToPost) {
-        // For testing, consider not marking them as posted yet
-        job.posted = true;
-        await client.channels
-          .fetch(process.env.CHANNEL_ID)
-          .then((channel) => channel.send(`${job.title}\n${job.link}`));
-      }
-      // Save the updated jobs back to the file if you're marking them as posted
-      await fs.writeFile(DATA_FILE_PATH, JSON.stringify(data, null, 2), {
-        encoding: "utf8",
-      });
-      await interaction.editReply("Posted 5 jobs.");
-    } else {
-      await interaction.editReply("No new jobs found to post.");
+    try {
+      // Trigger the scraping of new jobs
+      await fetchFrontEndJobs();
+
+      // And then trigger posting the jobs to Discord
+      await postJobsToDiscord();
+
+      // Let the user know the process is complete or in progress
+      await interaction.editReply(
+        "The job listings have been updated and posted."
+      );
+    } catch (error) {
+      console.error("Error during fetch or post process: ", error);
+      await interaction.editReply(
+        "There was an error updating or posting the job listings. Please check the logs."
+      );
     }
   }
-  // You can add more commands or event handlers here as needed
 });
 
 client.login(process.env.DISCORD_TOKEN);

@@ -48,7 +48,6 @@ client.once(Events.ClientReady, () => {
   );
 });
 
-// Existing interaction handling code here...
 client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isCommand()) return;
 
@@ -64,13 +63,15 @@ client.on(Events.InteractionCreate, async (interaction) => {
     if (jobsToPost.length > 0) {
       for (const job of jobsToPost) {
         // For testing, consider not marking them as posted yet
-        // job.posted = true;
+        job.posted = true;
         await client.channels
-          .fetch(CHANNEL_ID)
+          .fetch(process.env.CHANNEL_ID)
           .then((channel) => channel.send(`${job.title}\n${job.link}`));
       }
       // Save the updated jobs back to the file if you're marking them as posted
-      // await fs.writeFile(DATA_FILE_PATH, JSON.stringify(data, null, 2), { encoding: "utf8" });
+      await fs.writeFile(DATA_FILE_PATH, JSON.stringify(data, null, 2), {
+        encoding: "utf8",
+      });
       await interaction.editReply("Posted 5 jobs.");
     } else {
       await interaction.editReply("No new jobs found to post.");

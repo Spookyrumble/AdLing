@@ -1,15 +1,16 @@
-// yourScrapingScript.js
 import axios from "axios";
 import cheerio from "cheerio";
-import fs from "fs/promises"; // Use the promise-based version of fs for async/await
-import path from "path"; // For handling file paths
+import fs from "fs/promises";
+import path from "path";
 import { fileURLToPath } from "url";
+import { config } from "dotenv";
+
+config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function fetchFrontEndJobs() {
-  const url =
-    "https://www.finn.no/job/fulltime/search.html?location=0.20001&occupation=0.23";
+  const url = process.env.DATA_TARGET;
   const { data } = await axios.get(url);
   const $ = cheerio.load(data);
   const jobs = [];

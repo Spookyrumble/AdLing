@@ -1,0 +1,8 @@
+[
+      {
+    "title": "Listing title will store here",
+    "link": "Listing URL will store Here",
+    "date": "year-month-day",
+    "posted": Boolean,
+  },
+]

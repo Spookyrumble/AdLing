@@ -31,7 +31,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     if (response.length > 0) {
       await interaction.editReply(`Here are the jobs:\n${response}`);
     } else {
-      await interaction.editReply("No jobs found at the moment.");
+      await interaction.editReply("No new jobs found at the moment.");
     }
   } else if (commandName === "pingling") {
     // Add this else-if block

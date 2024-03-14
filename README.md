@@ -21,7 +21,7 @@ AdLing is a Discord bot designed to automatically scrape development job listing
 
 1. Clone this repository or download the source code.
 
-   `git clone https://yourrepositoryurl.git`
+   `git clone https://github.com/Spookyrumble/AdLing`
 
 2. Navigate to the project directory and install dependencies:
 
@@ -53,8 +53,8 @@ Ensure your bot is added to your Discord server and has permission to read messa
 
 ## Usage
 
-- **Automated Job Postings**: The bot will automatically post new job listings at 9 AM every day.
-- **Manual Trigger**: Use the /jobs command in your Discord server to manually trigger the posting of the latest scraped job listings.
+- **Automated Job Postings**: The bot will automatically post new job listings at 9 AM every day as long as the index script is running.
+- **Manual Trigger**: Use the /jobs command in your Discord server to manually trigger the posting of the five latest scraped job listings (for testing purposes).
 
 ## Contributing
 

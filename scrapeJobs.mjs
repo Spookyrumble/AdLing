@@ -28,21 +28,26 @@ async function fetchFrontEndJobs() {
   try {
     let existingJobs = [];
     try {
-      // Read the existing data.json file
       const data = await fs.readFile(filePath, { encoding: "utf8" });
       existingJobs = JSON.parse(data);
     } catch (err) {
       console.log("No existing data file found. A new one will be created.");
     }
 
-    // Combine the existing jobs with the newly fetched jobs
-    const updatedJobs = existingJobs.concat(jobs);
+    // Prepare a Set of existing job links for quick lookup
+    const existingLinks = new Set(existingJobs.map((job) => job.link));
 
-    // Write the combined list back to data.json
+    // Filter out new jobs that already exist based on their link
+    const uniqueJobs = jobs.filter((job) => !existingLinks.has(job.link));
+
+    // Combine the existing jobs with the unique new jobs
+    const updatedJobs = existingJobs.concat(uniqueJobs);
+
+    // Write the updated list back to data.json
     await fs.writeFile(filePath, JSON.stringify(updatedJobs, null, 2), {
       encoding: "utf8",
     });
-    console.log("Data has been written/updated in data.json");
+    console.log(uniqueJobs.length + " new job(s) have been added to data.json");
   } catch (err) {
     console.error("Error handling the file:", err);
   }

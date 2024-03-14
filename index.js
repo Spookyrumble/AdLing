@@ -23,10 +23,22 @@ client.once(Events.ClientReady, () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
   cron.schedule(
+    "0 0,12 * * *",
+    async () => {
+      console.log("Running scheduled scraping...");
+      await fetchFrontEndJobs(); // Scrape new jobs
+    },
+    {
+      scheduled: true,
+      timezone: "Europe/Oslo",
+    }
+  );
+
+  cron.schedule(
     "0 9 * * *",
     async () => {
       console.log("Running scheduled job fetch and post...");
-      await fetchFrontEndJobs();
+
       await postJobsToDiscord();
     },
     {

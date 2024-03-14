@@ -27,7 +27,7 @@ async function postJobsToDiscord() {
 
   // Proceed with posting jobs if there are new ones
   for (const job of jobsToPost) {
-    await channel.send(`${job.title}\n${job.link}`);
+    await channel.send(`${job.link}`);
     job.posted = true; // Mark as posted
     await new Promise((resolve) => setTimeout(resolve, POST_DELAY_MS));
   }

@@ -1,6 +1,6 @@
 # AdLing Discord Bot
 
-AdLing is a Discord bot designed to automatically scrape open development job listings from [finn.no](https://finn.no) and share them within a designated Discord channel. This bot aims to assist development communities in staying up-to-date with the latest job opportunities, facilitating easier access to potential employment options. It is set up to scrape twice per day and post new listings at 9am.
+AdLing is a Discord bot designed to automatically scrape open development job listings from [finn.no](https://finn.no) and share them within a designated Discord channel. This bot aims to assist development communities in staying up-to-date with the latest job opportunities, facilitating easier access to potential employment options. It is set up to scrape twice per day and post new listings at 9 am.
 
 ## Features
 

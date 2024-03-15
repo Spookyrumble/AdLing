@@ -12,14 +12,12 @@ async function cleanData() {
     );
     const currentDate = new Date();
 
-    // Filter out jobs older than 30 days
     const filteredData = data.filter((job) => {
       const jobDate = new Date(job.date);
-      const ageInDays = (currentDate - jobDate) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+      const ageInDays = (currentDate - jobDate) / (1000 * 60 * 60 * 24);
       return ageInDays <= 30;
     });
 
-    // Write the filtered list back to data.json
     await fs.writeFile(DATA_FILE_PATH, JSON.stringify(filteredData, null, 2), {
       encoding: "utf8",
     });

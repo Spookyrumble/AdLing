@@ -26,7 +26,7 @@ client.once(Events.ClientReady, () => {
     "0 0,12 * * *",
     async () => {
       console.log("Running scheduled scraping...");
-      await fetchFrontEndJobs(); // Scrape new jobs
+      await fetchFrontEndJobs();
     },
     {
       scheduled: true,
@@ -57,13 +57,10 @@ client.on(Events.InteractionCreate, async (interaction) => {
     await interaction.deferReply();
 
     try {
-      // Trigger the scraping of new jobs
       await fetchFrontEndJobs();
 
-      // And then trigger posting the jobs to Discord
       await postJobsToDiscord();
 
-      // Let the user know the process is complete or in progress
       await interaction.editReply(
         "The job listings have been updated and posted."
       );

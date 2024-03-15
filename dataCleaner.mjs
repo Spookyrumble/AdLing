@@ -18,10 +18,22 @@ async function cleanData() {
       return ageInDays <= 30;
     });
 
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(filteredData, null, 2), {
-      encoding: "utf8",
-    });
-    console.log(`Cleaned data. Removed objects older than 30 days.`);
+    if (data.length === filteredData.length) {
+      console.log("No items needed cleaning.");
+    } else {
+      await fs.writeFile(
+        DATA_FILE_PATH,
+        JSON.stringify(filteredData, null, 2),
+        {
+          encoding: "utf8",
+        }
+      );
+      console.log(
+        `Cleaned data. Removed ${
+          data.length - filteredData.length
+        } objects older than 30 days.`
+      );
+    }
   } catch (err) {
     console.error("Error cleaning data:", err);
   }

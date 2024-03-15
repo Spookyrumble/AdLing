@@ -1,6 +1,6 @@
 # AdLing Discord Bot
 
-AdLing is a Discord bot designed to automatically scrape development job listings from [finn.no](https://finn.no) and share them within a designated Discord channel. This bot aims to assist development communities in staying up-to-date with the latest job opportunities, facilitating easier access to potential employment options.
+AdLing is a Discord bot designed to automatically scrape open job listings from [finn.no](https://finn.no) and share them within a designated Discord channel. This bot aims to assist development communities in staying up-to-date with the latest job opportunities, facilitating easier access to potential employment options. It is set up to scrape twice per day and post new listings
 
 ## Features
 
@@ -21,40 +21,46 @@ AdLing is a Discord bot designed to automatically scrape development job listing
 
 1. Clone this repository or download the source code.
 
-   `git clone https://github.com/Spookyrumble/AdLing`
+   - Use the command:
+     `git clone https://github.com/Spookyrumble/AdLing`
 
 2. Navigate to the project directory and install dependencies:
 
-   `npm install`
+   - Run the command:
+     `npm install`
 
-3. Rename .env.example to .env and fill in your Discord Bot Token and the target channel ID:
+3. Rename `.env.example` to `.env` and fill in your Discord Bot Token and the target channel ID with your own values:
 
-   `DISCORD_TOKEN=your_discord_bot_token`
-
-   `CLIENT_ID=your_discord_bot_ID`
-
-   `GUILD_ID=your_discord_server_ID`
-
-   `CHANNEL_ID=your_discord_channel_ID`
+   - DISCORD_TOKEN=your_discord_bot_token
+   - CLIENT_ID=your_discord_bot_ID
+   - GUILD_ID=your_discord_server_ID
+   - CHANNEL_ID=your_discord_channel_ID
 
 4. Adjust the scraping target or intervals as needed in the source code.
 
 ## Running the Bot
 
-To register `/` commands, run:
+To register `/` commands, execute the following in your terminal:
 
-`node deploy-commands.js`
+- Command:
+  `node deploy-commands.js`
 
-To start the bot, run:
+To start the bot, use:
 
-`node index.js`
+- Command:
+  `node index.js`
+
+To clean data.json, use:
+
+- Command:
+  `node dataCleaner.mjs`
 
 Ensure your bot is added to your Discord server and has permission to read messages and send messages in the target channel.
 
 ## Usage
 
-- **Automated Job Postings**: The bot will automatically post new job listings at 9 AM every day as long as the index script is running.
-- **Manual Trigger**: Use the /jobs command in your Discord server to manually trigger the posting of the five latest scraped job listings (for testing purposes).
+- **Automated Job Postings**: The bot will automatically post new job listings at 9 AM every day as long as the index script is running. The scrape will happen every 12 hours.
+- **Manual Trigger**: Use the `/jobs` command in your Discord server to manually trigger the posting of the latest scraped job listings
 
 ## Contributing
 
